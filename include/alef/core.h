@@ -9,15 +9,15 @@
 /// See LICENSE file for details.
 ///
 
-#ifndef WINGMANN_ALEF_CORE_H
-#define WINGMANN_ALEF_CORE_H
-
-#include <cstddef>
+#ifndef ALEF_CORE_H
+#define ALEF_CORE_H
 
 namespace alef {
 
-using schar = signed char;
-using uchar = unsigned char;
+// Integrals ---------------------------------------------------------------------------------------
+
+using schar  = signed char;
+using uchar  = unsigned char;
 
 using int8   = schar;
 using uint8  = uchar;
@@ -25,6 +25,7 @@ using int16  = signed short int;
 using uint16 = unsigned short int;
 using int32  = signed int;
 using uint32 = unsigned int;
+
 #if defined(__WORDSIZE) && __WORDSIZE == 64
 using int64  = signed long int;
 using uint64 = unsigned long int;
@@ -33,25 +34,27 @@ using int64  = signed long long int;
 using uint64 = unsigned long long int;
 #endif
 
-namespace {
+// Architecture specific integrals -----------------------------------------------------------------
 
-enum { _size_of_ptr = sizeof(std::size_t) };
-
-} // namespace
-
-#if _size_of_ptr == 8
+#ifdef _WIN64 // todo Add unix-like macro checking
 using ssize   = int64;
 using size    = uint64;
 using ptrdiff = uint64;
-#elif _size_of_ptr == 4
+using intptr  = int64;
+#else
 using ssize   = int32;
 using size    = uint32;
 using ptrdiff = uint32;
+using intptr  = int32;
 #endif
 
-using float32 = float;
-using float64 = double;
+// Floating point ----------------------------------------------------------------------------------
+
+using float32  = float;
+using float64  = double;
 using float128 = long double;
+
+// Character ---------------------------------------------------------------------------------------
 
 using wchar  = wchar_t;
 using char8  = char8_t;
@@ -60,4 +63,4 @@ using char32 = char32_t;
 
 } // namespace alef
 
-#endif // WINGMANN_ALEF_CORE_H
+#endif // ALEF_CORE_H

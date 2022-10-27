@@ -14,7 +14,7 @@
 
 #include "alef/core.h"
 #include "alef/core/concepts.h"
-#include "alef/core/numerics/radix.h"
+#include "alef/core/numerics/radix_type.h"
 
 #include <algorithm>
 #include <cmath>
@@ -36,7 +36,7 @@ protected:
     // Sign flag.
     bool signed_{};
 
-    // String representation of decimal value.
+    // std::string representation of decimal value.
     std::string value_{"0"};
 
 public:
@@ -70,20 +70,20 @@ public:
 
     /// @brief Constructs from string literal.
     ///
-    /// @param value String literal value.
+    /// @param value std::string literal value.
     /// @param radix The base of a system of number.
     ///
-    big_integer(const char* value, radix_type radix = radix_type::decimal) : radix_{radix}
+    big_integer(const char* value, radix_type radix = radix_type::decimal) :radix_{radix}
     {
         *this = std::string{value};
     }
 
     /// @brief Constructs from string.
     ///
-    /// @param value String value.
+    /// @param value std::string value.
     /// @param radix The base of a system of number.
     ///
-    big_integer(std::string value, radix_type radix = radix_type::decimal) : radix_{radix}
+    big_integer(std::string value, radix_type radix = radix_type::decimal) :radix_{radix}
     {
         *this = std::move(value);
     }
@@ -447,7 +447,7 @@ public:
         auto lhs_value = this->value_;
         auto rhs_value = rhs.value_;
 
-        auto diff_length = std::abs(static_cast<int>(lhs_value.length() - rhs_value.length()));
+        auto diff_length = std::abs(static_cast<int32>(lhs_value.length() - rhs_value.length()));
 
         const auto min_value{'0'};
         const auto max_value{'9'};
@@ -460,7 +460,7 @@ public:
         std::ranges::reverse(lhs_value);
         std::ranges::reverse(rhs_value);
 
-        std::size_t index{};
+        size index{};
         char carry{min_value};
 
         for (char& lhs_char : lhs_value) {
@@ -510,7 +510,7 @@ public:
         std::string subtracted = inverted_sign ? rhs.value_ : this->value_;
         std::string removed = inverted_sign ? this->value_ : rhs.value_;
 
-        auto diff_length = std::abs(static_cast<int>(subtracted.length() - removed.length()));
+        auto diff_length = std::abs(static_cast<int32>(subtracted.length() - removed.length()));
 
         const auto min_value{'0'};
 
@@ -522,7 +522,7 @@ public:
         std::ranges::reverse(subtracted);
         std::ranges::reverse(removed);
 
-        std::size_t index{};
+        size index{};
 
         for (char& symbol : subtracted) {
             if (symbol < removed.at(index)) {
@@ -568,7 +568,7 @@ public:
             auto operation = std::string{}.insert(0, index, min_value);
 
             for (const auto& rhs_char : rhs_value) {
-                std::uint8_t result = ((lhs_char - min_value) * (rhs_char - min_value)) +
+                uint8 result = ((lhs_char - min_value) * (rhs_char - min_value)) +
                     (carry - min_value) + min_value;
                 carry = min_value;
 
@@ -867,7 +867,7 @@ public:
     /// @return Bit length of current value.
     ///
     [[nodiscard]]
-    std::size_t bit_length() const
+    size bit_length() const
     {
         return to_string(radix_type::binary).length();
     }
@@ -943,7 +943,7 @@ public:
 
     /// @brief Creates value from string value.
     ///
-    /// @tparam value String value.
+    /// @tparam value std::string value.
     /// @return       Constructed value.
     ///
     static big_integer value_from(std::string value)
@@ -964,7 +964,7 @@ protected:
     template<concepts::numeric::signed_integral T>
     std::optional<T> safe_convert(
         radix_type radix,
-        T (* func)(const std::string&, std::size_t*, int)) const
+        T (* func)(const std::string&, size*, int32)) const
     {
         try {
             return func(this->to_string(radix), nullptr, static_cast<int>(radix));
@@ -987,11 +987,11 @@ public:
 
     template<>
     [[nodiscard]]
-    std::optional<std::int8_t> to_integer(radix_type radix) const = delete;
+    std::optional<int8> to_integer(radix_type radix) const = delete;
 
     template<>
     [[nodiscard]]
-    std::optional<std::int16_t> to_integer(radix_type radix) const = delete;
+    std::optional<int16> to_integer(radix_type radix) const = delete;
 
     /// @brief Converts to integral value.
     ///
@@ -1001,7 +1001,7 @@ public:
     ///
     template<>
     [[nodiscard]]
-    std::optional<int> to_integer(radix_type radix) const
+    std::optional<int32> to_integer(radix_type radix) const
     {
         return safe_convert(radix, std::stoi);
     }
@@ -1014,7 +1014,7 @@ public:
     ///
     template<>
     [[nodiscard]]
-    std::optional<std::int64_t> to_integer(radix_type radix) const
+    std::optional<int64> to_integer(radix_type radix) const
     {
 #if defined(__WORDSIZE) && __WORDSIZE == 64
         return safe_convert(radix, std::stol);
@@ -1027,7 +1027,7 @@ public:
     /// @brief Converts to string representation.
     ///
     /// @param radix The base of a system of number.
-    /// @return      String representation of current value.
+    /// @return      std::string representation of current value.
     ///
     [[nodiscard]]
     std::string to_string(radix_type radix = radix_type::decimal) const
@@ -1126,11 +1126,11 @@ private:
 
         auto power = value_from(length - 1);
         auto converted_value = value_from(last);
-        auto radix_value = value_from(static_cast<std::uint8_t>(radix));
+        auto radix_value = value_from(static_cast<uint8>(radix));
 
         int current;
 
-        for (std::size_t i = 0; i < length - 1; ++i) {
+        for (size i = 0; i < length - 1; ++i) {
             current = char_to_digit(value.at(i));
             converted_value += value_from(current).multiply(radix_value.pow(power--));
         }

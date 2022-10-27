@@ -1,8 +1,6 @@
 #include <alef/core.h>
 #include <alef/core/concepts.h>
 
-#include <alef/core/numerics.h>
-
 #include <gtest/gtest.h>
 
 using namespace alef::concepts::chars;

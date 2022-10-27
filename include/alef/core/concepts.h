@@ -9,8 +9,8 @@
 /// See LICENSE file for details.
 ///
 
-#ifndef WINGMANN_ALEF_CORE_CONCEPTS_H
-#define WINGMANN_ALEF_CORE_CONCEPTS_H
+#ifndef ALEF_CORE_CONCEPTS_H
+#define ALEF_CORE_CONCEPTS_H
 
 #include <concepts>
 
@@ -122,7 +122,7 @@ template<typename T>
 concept destructible = std::is_nothrow_destructible_v<T>;
 
 template<typename T, typename... Args>
-concept constructible_from = std::destructible<T> && std::is_constructible_v<T, Args...>;
+concept constructible_from = destructible<T> && std::is_constructible_v<T, Args...>;
 
 template<typename T>
 concept default_initializable =
@@ -167,7 +167,7 @@ concept movable =
 
 template<typename T>
 concept copyable =
-copy_constructible<T> &&
+    copy_constructible<T> &&
     movable<T> &&
     assignable_from<T&, T&> &&
     assignable_from<T&, const T&> &&
@@ -177,7 +177,7 @@ template<typename T>
 concept semiregular = copyable<T> && default_initializable<T>;
 
 template<typename T>
-concept regular = std::semiregular<T> && equality_comparable<T>;
+concept regular = semiregular<T> && equality_comparable<T>;
 
 template<typename F, typename... Args>
 concept invocable = std::invocable<F, Args...>;
@@ -190,8 +190,10 @@ concept predicate = std::predicate<T, Args...>;
 
 template<typename R, typename T, typename U>
 concept relation =
-predicate<R, T, T> && predicate<R, U, U> &&
-    predicate<R, T, U> && predicate<R, U, T>;
+    predicate<R, T, T> &&
+    predicate<R, U, U> &&
+    predicate<R, T, U> &&
+    predicate<R, U, T>;
 
 template<typename R, typename T, typename U>
 concept equivalence_relation = relation<R, T, U>;
@@ -244,4 +246,4 @@ concept totally_ordered_swappable = totally_ordered<T> && swappable<T>;
 
 } // namespace alef::concepts
 
-#endif // WINGMANN_ALEF_CORE_CONCEPTS_H
+#endif // ALEF_CORE_CONCEPTS_H
