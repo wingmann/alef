@@ -8,5 +8,6 @@
 #include "alef/core/iterators.h"
 #include "alef/core/numerics.h"
 #include "alef/core/utility.h"
+#include "alef/core/serializing/json.h"
 
 #endif // ALEF_BITS_H
