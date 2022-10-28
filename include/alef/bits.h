@@ -4,6 +4,7 @@
 #include "alef/core.h"
 #include "alef/core/concepts.h"
 #include "alef/core/containers.h"
+#include "alef/core/error.h"
 #include "alef/core/io.h"
 #include "alef/core/iterators.h"
 #include "alef/core/numerics.h"

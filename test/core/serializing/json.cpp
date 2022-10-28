@@ -4,7 +4,7 @@
 
 using namespace alef::serializing;
 
-TEST(jsonlw, dump)
+TEST(alef_core_serializing, json_dump)
 {
     json obj;
     obj["array"] = json::array(true, "two", 3, 4.0);
@@ -20,7 +20,7 @@ TEST(jsonlw, dump)
     EXPECT_TRUE(true);
 }
 
-TEST(jsonlw, load)
+TEST(alef_core_serializing, json_load)
 {
     json obj = json::load(R"(
     {
