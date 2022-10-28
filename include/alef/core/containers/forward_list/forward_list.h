@@ -9,8 +9,8 @@
 /// See LICENSE file for details.
 ///
 
-#ifndef ALEF_CONTAINERS_FORWARD_LIST_H
-#define ALEF_CONTAINERS_FORWARD_LIST_H
+#ifndef ALEF_CORE_CONTAINERS_FORWARD_LIST_FORWARD_LIST_H
+#define ALEF_CORE_CONTAINERS_FORWARD_LIST_FORWARD_LIST_H
 
 #include "alef/core/containers/forward_list/node.h"
 #include "alef/core/iterators/forward_iterator.h"
@@ -31,8 +31,8 @@ template<typename T>
 class forward_list {
 public:
     using value_type      = T;
-    using size_type       = std::size_t;
-    using difference_type = std::ptrdiff_t;
+    using size_type       = size;
+    using difference_type = ptrdiff;
     using reference       = value_type&;
     using const_reference = const value_type&;
     using pointer         = T*;
@@ -52,7 +52,7 @@ public:
     {
     }
 
-    constexpr explicit forward_list(size_type count, const_reference value) :size_{count}
+    constexpr explicit forward_list(size_type count, const_reference value) : size_{count}
     {
         auto current_node = new node_type{value};
         head_ = current_node;
@@ -637,4 +637,4 @@ constexpr bool operator>(const forward_list<T>& first, const forward_list<T>& ot
 
 } // namespace alef::containers
 
-#endif // ALEF_CONTAINERS_FORWARD_LIST_H
+#endif // ALEF_CORE_CONTAINERS_FORWARD_LIST_FORWARD_LIST_H
