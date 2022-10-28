@@ -1,5 +1,5 @@
 #include <alef/core.h>
-#include <alef/core/concepts.h>
+#include <alef/core/concepts/numeric.h>
 
 #include <gtest/gtest.h>
 
@@ -20,7 +20,6 @@ TEST(alef_core_concepts, numeric_number)
     EXPECT_TRUE(is_numeric_number(alef::uint32{}));
     EXPECT_TRUE(is_numeric_number(alef::int64{}));
     EXPECT_TRUE(is_numeric_number(alef::uint64{}));
-
     EXPECT_TRUE(is_numeric_number(alef::float32{}));
     EXPECT_TRUE(is_numeric_number(alef::float64{}));
     EXPECT_TRUE(is_numeric_number(alef::float128{}));

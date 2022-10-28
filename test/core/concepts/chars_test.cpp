@@ -1,5 +1,5 @@
 #include <alef/core.h>
-#include <alef/core/concepts.h>
+#include <alef/core/concepts/chars.h>
 
 #include <gtest/gtest.h>
 
