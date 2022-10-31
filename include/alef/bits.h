@@ -2,13 +2,14 @@
 #define ALEF_BITS_H
 
 #include "alef/core.h"
-#include "concepts.h"
-#include "containers.h"
-#include "error.h"
-#include "io.h"
-#include "iterators.h"
-#include "numerics.h"
-#include "utility.h"
-#include "serializing.h"
+#include "alef/concepts.h"
+#include "alef/containers.h"
+#include "alef/error.h"
+#include "alef/io.h"
+#include "alef/iterators.h"
+#include "alef/numerics.h"
+#include "alef/serializing.h"
+#include "alef/string.h"
+#include "alef/utility.h"
 
 #endif // ALEF_BITS_H

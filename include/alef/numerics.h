@@ -1,6 +1,6 @@
-#ifndef ALEF_CORE_NUMERIC_H
-#define ALEF_CORE_NUMERIC_H
+#ifndef ALEF_NUMERIC_H
+#define ALEF_NUMERIC_H
 
 #include "alef/core/numerics/big_integer.h"
 
-#endif // ALEF_CORE_NUMERIC_H
+#endif // ALEF_NUMERIC_H

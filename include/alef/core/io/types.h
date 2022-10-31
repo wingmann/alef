@@ -1,7 +1,7 @@
 #ifndef ALEF_CORE_IO_TYPES_H
 #define ALEF_CORE_IO_TYPES_H
 
-#include "alef/core.h"
+#include "alef/core/detail/types.h"
 
 #include <istream>
 #include <ostream>
