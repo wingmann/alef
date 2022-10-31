@@ -1,7 +1,7 @@
 #ifndef ALEF_CORE_SERIALIZING_JSON_JSON_H
 #define ALEF_CORE_SERIALIZING_JSON_JSON_H
 
-#include "alef/core/concepts.h"
+#include "alef/concepts.h"
 #include "alef/core/serializing/json/backing_data.h"
 
 #include <initializer_list>

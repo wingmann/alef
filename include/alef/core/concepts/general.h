@@ -1,12 +1,14 @@
 #ifndef ALEF_CORE_CONCEPTS_GENERAL_H
 #define ALEF_CORE_CONCEPTS_GENERAL_H
 
-#include "alef/core/__detail/concepts.h"
+#include "alef/core/detail/concepts.h"
 
 namespace alef::concepts {
 
 template<typename T, typename U>
-concept same_as = __detail::same_helper<T, U> && __detail::same_helper<U, T>;
+concept same_as =
+    alef::concepts::__detail::same_impl<T, U> &&
+    alef::concepts::__detail::same_impl<U, T>;
 
 template<typename Derived, typename Base>
 concept derived_from =

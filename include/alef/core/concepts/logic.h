@@ -6,7 +6,7 @@
 namespace alef::concepts::logic {
 
 template<typename T>
-concept boolean = same_as<T, bool>;
+concept boolean = alef::concepts::same_as<T, bool>;
 
 template<typename T>
 concept not_boolean = !boolean<T>;

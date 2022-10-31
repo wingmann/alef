@@ -1,10 +1,7 @@
 #ifndef ALEF_CORE_H
 #define ALEF_CORE_H
 
-namespace alef {
-
-#include "alef/core/__detail/types.h"
-
-} // namespace alef
+#include "alef/core/detail/types.h"
+#include "alef/core/detail/type_flags.h"
 
 #endif // ALEF_CORE_H

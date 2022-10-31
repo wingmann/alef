@@ -12,6 +12,8 @@
 #ifndef ALEF_CORE_DETAIL_TYPES_H
 #define ALEF_CORE_DETAIL_TYPES_H
 
+namespace alef {
+
 // Integrals ---------------------------------------------------------------------------------------
 
 using schar  = signed char;
@@ -58,5 +60,7 @@ using wchar  = wchar_t;
 using char8  = char8_t;
 using char16 = char16_t;
 using char32 = char32_t;
+
+} // namespace alef
 
 #endif // ALEF_CORE_DETAIL_TYPES_H

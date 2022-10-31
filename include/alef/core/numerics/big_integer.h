@@ -13,7 +13,7 @@
 #define ALEF_CORE_NUMERICS_BIG_INTEGER_H
 
 #include "alef/core.h"
-#include "alef/core/concepts.h"
+#include "alef/concepts.h"
 #include "alef/core/numerics/radix_type.h"
 
 #include <algorithm>

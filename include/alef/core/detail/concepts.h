@@ -41,7 +41,7 @@ constexpr auto is_character_v = is_any_of_v<
     char32_t>;
 
 template<typename T, typename U>
-concept same_helper = std::is_same_v<T, U>;
+concept same_impl = std::is_same_v<T, U>;
 
 } // namespace alef::concepts::__detail
 
