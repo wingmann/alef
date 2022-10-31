@@ -95,14 +95,14 @@ public:
     /// @param rhs Value to copy.
     /// @return    Constructed object.
     ///
-    big_integer& operator=(const big_integer& rhs) & = default;
+    big_integer& operator=(const big_integer& rhs) = default;
 
     /// @brief Move assignment operator.
     ///
     /// @param rhs Value to move.
     /// @return    Constructed object.
     ///
-    big_integer& operator=(big_integer&& rhs) & noexcept
+    big_integer& operator=(big_integer&& rhs) noexcept
     {
         this->radix_ = rhs.radix_;
         this->signed_ = rhs.signed_;
@@ -118,7 +118,7 @@ public:
     /// @param rhs An integral rhs.
     /// @return    Constructed object.
     ///
-    big_integer& operator=(concepts::numeric::integral auto rhs) &
+    big_integer& operator=(concepts::numeric::integral auto rhs)
     {
         *this = std::to_string(rhs);
         return *this;
@@ -129,7 +129,7 @@ public:
     /// @param rhs The string literal.
     /// @return    Constructed object.
     ///
-    big_integer& operator=(const char* rhs) &
+    big_integer& operator=(const char* rhs)
     {
         *this = std::string{rhs};
         return *this;
@@ -140,7 +140,7 @@ public:
     /// @param value The value from which to construct.
     /// @return      Constructed object.
     ///
-    big_integer& operator=(std::string value) &
+    big_integer& operator=(std::string value)
     {
         this->signed_ = value.starts_with('-');
 
@@ -167,7 +167,7 @@ public:
     /// @param rhs The value to add to the current value.
     /// @return    Modified object.
     ///
-    big_integer& operator+=(const big_integer& rhs) &
+    big_integer& operator+=(const big_integer& rhs)
     {
         *this = this->add(rhs);
         return *this;
@@ -178,7 +178,7 @@ public:
     /// @param rhs The value to subtract from the current value.
     /// @return    Modified object.
     ///
-    big_integer& operator-=(const big_integer& rhs) &
+    big_integer& operator-=(const big_integer& rhs)
     {
         *this = this->subtract(rhs);
         return *this;
@@ -189,7 +189,7 @@ public:
     /// @param rhs The value to multiply by current value.
     /// @return    Modified object.
     ///
-    big_integer& operator*=(const big_integer& rhs) &
+    big_integer& operator*=(const big_integer& rhs)
     {
         *this = this->multiply(rhs);
         return *this;
@@ -200,7 +200,7 @@ public:
     /// @param rhs The value by which to divide the current value.
     /// @return    Modified object.
     ///
-    big_integer& operator/=(const big_integer& rhs) &
+    big_integer& operator/=(const big_integer& rhs)
     {
         *this = this->divide(rhs);
         return *this;
@@ -212,7 +212,7 @@ public:
     /// @param rhs The right operand for taking the remainder.
     /// @return    Modified object.
     ///
-    big_integer& operator%=(const big_integer& rhs) &
+    big_integer& operator%=(const big_integer& rhs)
     {
         *this = this->mod(rhs);
         return *this;
@@ -223,7 +223,7 @@ public:
     /// @param rhs The value to shift_right on.
     /// @return    Modified object.
     ///
-    big_integer& operator<<=(const big_integer& rhs) &
+    big_integer& operator<<=(const big_integer& rhs)
     {
         *this = this->shift_left(rhs);
         return *this;
@@ -234,7 +234,7 @@ public:
     /// @param rhs The value to shift_right on.
     /// @return    Modified object.
     ///
-    big_integer& operator>>=(const big_integer& rhs) &
+    big_integer& operator>>=(const big_integer& rhs)
     {
         *this = this->shift_right(rhs);
         return *this;
@@ -245,7 +245,7 @@ public:
     /// @brief Increments the current value.
     /// @return Modified object.
     ///
-    big_integer& operator++() &
+    big_integer& operator++()
     {
         *this = this->add(1);
         return *this;
@@ -254,7 +254,7 @@ public:
     /// @brief Increments the current value after returns copy.
     /// @return Copy of current value.
     ///
-    big_integer operator++(int) &
+    big_integer operator++(int)
     {
         auto temp{*this};
         ++(*this);
@@ -264,7 +264,7 @@ public:
     /// @brief Decrements the current value.
     /// @return Modified object.
     ///
-    big_integer& operator--() &
+    big_integer& operator--()
     {
         *this = this->subtract(1);
         return *this;
@@ -273,7 +273,7 @@ public:
     /// @brief Decrements the current value after returns copy.
     /// @return Copy of current value.
     ///
-    big_integer operator--(int) &
+    big_integer operator--(int)
     {
         auto temp{*this};
         --(*this);
