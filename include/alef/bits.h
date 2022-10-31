@@ -10,6 +10,5 @@
 #include "alef/numerics.h"
 #include "alef/serializing.h"
 #include "alef/string.h"
-#include "alef/utility.h"
 
 #endif // ALEF_BITS_H

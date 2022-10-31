@@ -1,10 +1,10 @@
-#include <alef/core/utility/strings.h>
+#include <alef/strings.h>
 
 #include <gtest/gtest.h>
 
-using namespace alef::utility;
+using namespace alef::strings;
 
-TEST(alef_core_utility, split)
+TEST(alef_core_strings, split)
 {
     auto result = split("Lorem|ipsum|dolor sit amet", '|');
 

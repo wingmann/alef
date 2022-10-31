@@ -1,9 +1,70 @@
 #ifndef ALEF_STRING_H
 #define ALEF_STRING_H
 
-#include <sstream>
+#include "alef/core/string/types.h"
 
-using namespace std::string_literals;
-using namespace std::string_view_literals;
+// String literals ---------------------------------------------------------------------------------
+
+[[nodiscard]]
+constexpr auto operator""_s(const char* str, alef::size length)
+{
+    return alef::string(str, length);
+}
+
+[[nodiscard]]
+constexpr auto operator""_s(const alef::wchar* str, alef::size length)
+{
+    return alef::wstring(str, length);
+}
+
+[[nodiscard]]
+constexpr auto operator""_s(const alef::char8* str, alef::size length)
+{
+    return alef::utf8string(str, length);
+}
+
+[[nodiscard]]
+constexpr auto operator""_s(const alef::char16* str, alef::size length)
+{
+    return alef::utf16string(str, length);
+}
+
+[[nodiscard]]
+constexpr auto operator""_s(const alef::char32* str, alef::size length)
+{
+    return alef::utf32string(str, length);
+}
+
+// String view literals ----------------------------------------------------------------------------
+
+[[nodiscard]]
+constexpr auto operator""_sv(const char* str, alef::size length)
+{
+    return alef::string_view(str, length);
+}
+
+[[nodiscard]]
+constexpr auto operator""_sv(const alef::wchar* str, alef::size length)
+{
+    return alef::wstring_view(str, length);
+}
+
+[[nodiscard]]
+constexpr auto operator""_sv(const alef::char8* str, alef::size length)
+{
+    return alef::utf8string_view(str, length);
+}
+
+[[nodiscard]]
+constexpr auto operator""_sv(const alef::char16* str, alef::size length)
+{
+    return alef::utf16string_view(str, length);
+}
+
+[[nodiscard]]
+constexpr auto operator""_sv(const alef::char32* str, alef::size length)
+{
+    return alef::utf32string_view(str, length);
+}
 
 #endif // ALEF_STRING_H

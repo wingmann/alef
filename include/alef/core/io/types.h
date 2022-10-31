@@ -1,22 +1,23 @@
 #ifndef ALEF_CORE_IO_TYPES_H
 #define ALEF_CORE_IO_TYPES_H
 
-#include "alef/core/detail/types.h"
+#include "alef/core/detail/streams.h"
 
 #include <istream>
 #include <ostream>
+#include <fstream>
 
 namespace alef::io {
 
-using input = std::basic_istream<char, std::char_traits<char>>;
-using print = std::basic_ostream<char, std::char_traits<char>>;
-using error = std::basic_ostream<char, std::char_traits<char>>;
-using log   = std::basic_ostream<char, std::char_traits<char>>;
+using input = alef::stream::input_stream;
+using print = alef::stream::output_stream;
+using error = alef::stream::output_stream;
+using log   = alef::stream::output_stream;
 
-using winput = std::basic_istream<wchar, std::char_traits<wchar>>;
-using wprint = std::basic_ostream<wchar, std::char_traits<wchar>>;
-using werror = std::basic_ostream<wchar, std::char_traits<wchar>>;
-using wlog   = std::basic_ostream<wchar, std::char_traits<wchar>>;
+using winput = alef::stream::winput_stream;
+using wprint = alef::stream::woutput_stream;
+using werror = alef::stream::woutput_stream;
+using wlog   = alef::stream::woutput_stream;
 
 } // alef::io
 
