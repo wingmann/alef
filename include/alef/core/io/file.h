@@ -1,19 +1,21 @@
 #ifndef ALEF_CORE_IO_FILE_H
 #define ALEF_CORE_IO_FILE_H
 
-#include "alef/core/detail/streams.h"
+#include "alef/core/io/__detail.h"
 
-namespace alef::io {
+namespace alf::io {
 
-using input_file   = alef::stream::input_file;
-using output_file  = alef::stream::output_file;
-using file         = alef::stream::file;
-using file_buffer  = alef::stream::file_buffer;
+using input_file   = alf::io::__detail::input_file;
+using winput_file  = alf::io::__detail::winput_file;
 
-using winput_file  = alef::stream::winput_file;
-using woutput_file = alef::stream::woutput_file;
-using wfile        = alef::stream::wfile;
-using wfile_buffer = alef::stream::wfile_buffer;
+using output_file  = alf::io::__detail::output_file;
+using woutput_file = alf::io::__detail::woutput_file;
+
+using file         = alf::io::__detail::file;
+using wfile        = alf::io::__detail::wfile;
+
+using file_buffer  = alf::io::__detail::file_buffer;
+using wfile_buffer = alf::io::__detail::wfile_buffer;
 
 } // namespace alef::io
 

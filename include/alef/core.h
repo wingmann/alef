@@ -1,7 +1,3 @@
-#ifndef ALEF_CORE_H
-#define ALEF_CORE_H
-
-#include "alef/core/detail/type_flags.h"
-#include "alef/core/detail/type_literals.h"
-
-#endif // ALEF_CORE_H
+#include "alef/core/constants/integral_limits.h"
+#include "alef/core/types/general/type_flags.h"
+#include "alef/core/types/general/type_literals.h"

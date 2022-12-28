@@ -2,7 +2,7 @@
 
 #include <gtest/gtest.h>
 
-using namespace alef::strings;
+using namespace alf::strings;
 
 TEST(alef_core_strings, split)
 {

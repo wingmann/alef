@@ -1,15 +1,19 @@
-#ifndef ALEF_BITS_H
-#define ALEF_BITS_H
+#ifndef WINGMANN_ALEF_BITS_H
+#define WINGMANN_ALEF_BITS_H
 
+// Core.
 #include "alef/core.h"
-#include "alef/concepts.h"
-#include "alef/containers.h"
-#include "alef/error.h"
 #include "alef/io.h"
-#include "alef/iterators.h"
-#include "alef/numerics.h"
-#include "alef/serializing.h"
 #include "alef/string.h"
-#include "alef/utility.h"
+#include "alef/strings.h"
+#include "alef/types.h"
 
-#endif // ALEF_BITS_H
+// Libraries.
+#include "alef/lib/concepts.h"
+#include "alef/lib/containers.h"
+#include "alef/lib/error.h"
+#include "alef/lib/iterators.h"
+#include "alef/lib/numerics.h"
+#include "alef/lib/serializing.h"
+
+#endif // WINGMANN_ALEF_BITS_H
