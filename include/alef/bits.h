@@ -1,10 +1,7 @@
-#ifndef WINGMANN_ALEF_BITS_H
-#define WINGMANN_ALEF_BITS_H
-
 // Core.
 #include "alef/core.h"
 #include "alef/io.h"
-#include "alef/string.h"
+#include "alef/strings.h"
 #include "alef/strings.h"
 #include "alef/types.h"
 
@@ -15,5 +12,3 @@
 #include "alef/lib/iterators.h"
 #include "alef/lib/numerics.h"
 #include "alef/lib/serializing.h"
-
-#endif // WINGMANN_ALEF_BITS_H
