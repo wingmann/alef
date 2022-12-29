@@ -3,11 +3,11 @@
 
 #include "alef/core/io/__detail.h"
 
-namespace alf::io {
+namespace alf {
 
-using input  = alf::io::__detail::input_stream;
-using winput = alf::io::__detail::winput_stream;
+alf::io::__detail::input_stream& input = std::cin;
+alf::io::__detail::winput_stream& winput = std::wcin;
 
-} // namespace alf::io
+} // namespace alf
 
 #endif // ALEF_CORE_IO_INPUT_H

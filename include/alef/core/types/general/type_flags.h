@@ -1,5 +1,5 @@
-#ifndef ALEF_CORE_TYPES_INTEGER_INTEGER_TYPE_H
-#define ALEF_CORE_TYPES_INTEGER_INTEGER_TYPE_H
+#ifndef ALEF_CORE_TYPES_GENERAL_TYPE_FLAGS_H
+#define ALEF_CORE_TYPES_GENERAL_TYPE_FLAGS_H
 
 #include "alef/core/types/general/primitives.h"
 
@@ -173,4 +173,4 @@ public:
 
 } // namespace alf::type
 
-#endif // ALEF_CORE_TYPES_INTEGER_INTEGER_TYPE_H
+#endif // ALEF_CORE_TYPES_GENERAL_TYPE_FLAGS_H

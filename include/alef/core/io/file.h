@@ -3,7 +3,7 @@
 
 #include "alef/core/io/__detail.h"
 
-namespace alf::io {
+namespace alf {
 
 using input_file   = alf::io::__detail::input_file;
 using winput_file  = alf::io::__detail::winput_file;
@@ -17,6 +17,6 @@ using wfile        = alf::io::__detail::wfile;
 using file_buffer  = alf::io::__detail::file_buffer;
 using wfile_buffer = alf::io::__detail::wfile_buffer;
 
-} // namespace alef::io
+} // namespace alef
 
 #endif // ALEF_CORE_IO_FILE_H

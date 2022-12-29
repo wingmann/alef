@@ -5,19 +5,17 @@
 
 #include <iostream>
 
-namespace alf::io {
+namespace alf {
 
-using print   = alf::io::__detail::output_stream;
-using wprint  = alf::io::__detail::woutput_stream;
+alf::io::__detail::output_stream& print = std::cout;
+alf::io::__detail::woutput_stream& wprint = std::wcout;
 
-using eprint  = alf::io::__detail::output_stream;
-using weprint = alf::io::__detail::woutput_stream;
+alf::io::__detail::output_stream& eprint = std::cerr;
+alf::io::__detail::woutput_stream& ewprint = std::wcerr;
 
-using log     = alf::io::__detail::output_stream;
-using wlog    = alf::io::__detail::woutput_stream;
+alf::io::__detail::output_stream& log = std::clog;
+alf::io::__detail::woutput_stream& wlog = std::wclog;
 
+} // namespace alf
 
-
-} // namespace alf::io
-std::cin
 #endif // ALEF_CORE_IO_OUTPUT_H

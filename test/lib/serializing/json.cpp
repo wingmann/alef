@@ -1,10 +1,12 @@
+#include <alef/core.h>
+#include <alef/io.h>
 #include <alef/lib/serializing/json.h>
 
 #include <gtest/gtest.h>
 
 using namespace alf::serializing;
 
-TEST(alef_core_serializing, json_dump)
+TEST(alef_lib_serializing_json, dump)
 {
     json obj;
     obj["array"] = json::array(true, "two", 3, 4.0);
@@ -14,13 +16,12 @@ TEST(alef_core_serializing, json_dump)
     obj["array2"].append(false, "three");
     obj["parsed"] = json::load(R"([{"key": "value"}, false])");
 
-    auto dump = obj.dump();
-    std::cout << dump << "\n\n";
+    alf::print << obj.dump() << "\n\n";
 
     EXPECT_TRUE(true);
 }
 
-TEST(alef_core_serializing, json_load)
+TEST(alef_lib_serializing_json, load)
 {
     json obj = json::load(R"(
     {
@@ -42,8 +43,7 @@ TEST(alef_core_serializing, json_load)
         ]
     })");
 
-    auto dump = obj.dump();
-    std::cout << dump << "\n\n";
+    alf::print << obj.dump() << "\n\n";
 
     EXPECT_TRUE(true);
 }

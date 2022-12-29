@@ -9,8 +9,8 @@
 /// See LICENSE file for details.
 ///
 
-#ifndef ALEF_CORE_DETAIL_TYPES_H
-#define ALEF_CORE_DETAIL_TYPES_H
+#ifndef ALEF_CORE_TYPES_GENERAL_PRIMITIVES_H
+#define ALEF_CORE_TYPES_GENERAL_PRIMITIVES_H
 
 namespace alf {
 
@@ -60,4 +60,4 @@ using char32    = char32_t;
 
 } // namespace alf
 
-#endif // ALEF_CORE_DETAIL_TYPES_H
+#endif // ALEF_CORE_TYPES_GENERAL_PRIMITIVES_H

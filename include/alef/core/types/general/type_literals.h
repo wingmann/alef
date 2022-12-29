@@ -1,5 +1,5 @@
-#ifndef ALEF_CORE_GENERAL_TYPE_LITERALS_H
-#define ALEF_CORE_GENERAL_TYPE_LITERALS_H
+#ifndef ALEF_CORE_TYPES_GENERAL_TYPE_LITERALS_H
+#define ALEF_CORE_TYPES_GENERAL_TYPE_LITERALS_H
 
 #include "alef/core/types/general/primitives.h"
 
@@ -121,4 +121,4 @@ constexpr auto operator""_ch32(alf::char32 value)
 
 } // namespace alf
 
-#endif // ALEF_CORE_GENERAL_TYPE_LITERALS_H
+#endif // ALEF_CORE_TYPES_GENERAL_TYPE_LITERALS_H
