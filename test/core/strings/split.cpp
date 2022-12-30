@@ -1,4 +1,4 @@
-#include <alef/strings.h>
+#include <alef/string.h>
 
 #include <gtest/gtest.h>
 

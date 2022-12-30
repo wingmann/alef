@@ -12,8 +12,8 @@
 #ifndef ALEF_CORE_NUMERICS_BIG_INTEGER_H
 #define ALEF_CORE_NUMERICS_BIG_INTEGER_H
 
-#include "alef/core.h"
-#include "alef/core/strings/string.h"
+#include "alef/alef.h"
+#include "alef/core/string/string.h"
 #include "alef/core/types/numerics/radix.h"
 
 #include "alef/lib/concepts.h"
@@ -37,7 +37,7 @@ protected:
     // Sign flag.
     bool signed_{};
 
-    // std::strings representation of decimal value.
+    // std::string representation of decimal value.
     alf::string value_{"0"};
 
 public:
@@ -69,9 +69,9 @@ public:
         *this = std::to_string(value);
     }
 
-    /// @brief Constructs from strings literal.
+    /// @brief Constructs from string literal.
     ///
-    /// @param value std::strings literal value.
+    /// @param value std::string literal value.
     /// @param radix The base of a system of number.
     ///
     big_integer(const char* value, alf::types::radix radix = alf::types::radix::decimal)
@@ -80,9 +80,9 @@ public:
         *this = std::string{value};
     }
 
-    /// @brief Constructs from strings.
+    /// @brief Constructs from string.
     ///
-    /// @param value std::strings value.
+    /// @param value std::string value.
     /// @param radix The base of a system of number.
     ///
     big_integer(std::string value, alf::types::radix radix = alf::types::radix::decimal)
@@ -127,9 +127,9 @@ public:
         return *this;
     }
 
-    /// @brief Constructs from the strings literal.
+    /// @brief Constructs from the string literal.
     ///
-    /// @param rhs The strings literal.
+    /// @param rhs The string literal.
     /// @return    Constructed object.
     ///
     big_integer& operator=(const char* rhs)
@@ -138,7 +138,7 @@ public:
         return *this;
     }
 
-    /// @brief Constructs from the strings value.
+    /// @brief Constructs from the string value.
     ///
     /// @param value The value from which to construct.
     /// @return      Constructed object.
@@ -944,9 +944,9 @@ public:
         return std::to_string(value);
     }
 
-    /// @brief Creates value from strings value.
+    /// @brief Creates value from string value.
     ///
-    /// @tparam value std::strings value.
+    /// @tparam value std::string value.
     /// @return       Constructed value.
     ///
     static big_integer value_from(std::string value)
@@ -1027,10 +1027,10 @@ public:
     }
 
 public:
-    /// @brief Converts to strings representation.
+    /// @brief Converts to string representation.
     ///
     /// @param radix The base of a system of number.
-    /// @return      std::strings representation of current value.
+    /// @return      std::string representation of current value.
     ///
     [[nodiscard]]
     std::string to_string(alf::types::radix radix = alf::types::radix::decimal) const
@@ -1101,7 +1101,7 @@ private:
         return "0123456789ABCDEF";
     }
 
-    // Converts not base ten value to strings.
+    // Converts not base ten value to string.
     static std::string convert_from_base_ten(
         const big_integer& value,
         const alf::types::radix radix)
@@ -1123,7 +1123,7 @@ private:
         return result;
     }
 
-    // Converts strings value to base ten.
+    // Converts string value to base ten.
     static std::string convert_to_base_ten(const std::string& value, alf::types::radix radix)
     {
         auto last = char_to_digit(value.back());

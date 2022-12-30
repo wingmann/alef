@@ -1,8 +1,7 @@
 // Core.
-#include "alef/core.h"
+#include "alef/alef.h"
 #include "alef/io.h"
-#include "alef/strings.h"
-#include "alef/strings.h"
+#include "alef/string.h"
 #include "alef/types.h"
 
 // Libraries.

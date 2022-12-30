@@ -3,20 +3,20 @@
 
 #include "alef/core/io/__detail.h"
 
-namespace alf {
+namespace alf::io {
 
-using input_file   = alf::io::__detail::input_file;
-using winput_file  = alf::io::__detail::winput_file;
+using input_file     = alf::core::io::__detail::input_file;
+using wc_input_file  = alf::core::io::__detail::wc_input_file;
 
-using output_file  = alf::io::__detail::output_file;
-using woutput_file = alf::io::__detail::woutput_file;
+using output_file    = alf::core::io::__detail::output_file;
+using wc_output_file = alf::core::io::__detail::wc_output_file;
 
-using file         = alf::io::__detail::file;
-using wfile        = alf::io::__detail::wfile;
+using file           = alf::core::io::__detail::file;
+using wc_file        = alf::core::io::__detail::wc_file;
 
-using file_buffer  = alf::io::__detail::file_buffer;
-using wfile_buffer = alf::io::__detail::wfile_buffer;
+using file_buffer    = alf::core::io::__detail::file_buffer;
+using wc_file_buffer = alf::core::io::__detail::wc_file_buffer;
 
-} // namespace alef
+} // namespace alf::io
 
 #endif // ALEF_CORE_IO_FILE_H

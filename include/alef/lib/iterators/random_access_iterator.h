@@ -12,7 +12,7 @@
 #ifndef ALEF_CORE_ITERATORS_RANDOM_ACCESS_ITERATOR_H
 #define ALEF_CORE_ITERATORS_RANDOM_ACCESS_ITERATOR_H
 
-#include "alef/core.h"
+#include "alef/alef.h"
 
 #include <iterator>
 

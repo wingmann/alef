@@ -1,8 +1,8 @@
 #ifndef ALEF_CORE_UTILITY_STRINGS_H
 #define ALEF_CORE_UTILITY_STRINGS_H
 
-#include "alef/core/strings/string.h"
-#include "alef/core/strings/string_streams.h"
+#include "alef/core/string/string.h"
+#include "alef/core/string/string_stream.h"
 
 #include <vector>
 
@@ -20,6 +20,6 @@ std::vector<alf::string> split(const alf::string& text, char delimiter)
     return data;
 }
 
-} // namespace alf::strings
+} // namespace alf::string
 
 #endif // ALEF_CORE_UTILITY_STRINGS_H

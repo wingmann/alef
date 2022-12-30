@@ -1,11 +1,9 @@
-#include <alef/core.h>
+#include <alef/alef.h>
 #include <alef/lib/concepts/chars.h>
 
 #include <gtest/gtest.h>
 
-using namespace alf::concepts::chars;
-
-auto is_character = [](character auto value)
+auto is_character = [](alf::concepts::chars::character auto value)
 {
     return true;
 };

@@ -3,9 +3,9 @@
 
 #include "backing_data.h"
 
-#include "alef/core.h"
-#include "alef/core/strings/string.h"
-#include "alef/core/strings/string_streams.h"
+#include "alef/alef.h"
+#include "alef/core/string/string.h"
+#include "alef/core/string/string_stream.h"
 
 #include "alef/lib/concepts.h"
 
@@ -134,7 +134,7 @@ public:
         }
     }
 
-    /// @brief Constructs from strings.
+    /// @brief Constructs from string.
     template<concepts::convertible_to<alf::string> T>
     explicit json(T value) : internal_{alf::string{value}}, type_{class_type::string}
     {

@@ -1,4 +1,4 @@
-#include <alef/core.h>
+#include <alef/alef.h>
 #include <alef/io.h>
 #include <alef/lib/serializing/json.h>
 
@@ -16,7 +16,8 @@ TEST(alef_lib_serializing_json, dump)
     obj["array2"].append(false, "three");
     obj["parsed"] = json::load(R"([{"key": "value"}, false])");
 
-    alf::print << obj.dump() << "\n\n";
+    alf::io_stdout out;
+    out.print << obj.dump() << "\n\n";
 
     EXPECT_TRUE(true);
 }
@@ -43,7 +44,8 @@ TEST(alef_lib_serializing_json, load)
         ]
     })");
 
-    alf::print << obj.dump() << "\n\n";
+    alf::io_stdout out;
+    out.print << obj.dump() << "\n\n";
 
     EXPECT_TRUE(true);
 }

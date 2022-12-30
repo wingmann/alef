@@ -1,7 +1,7 @@
 #ifndef WINGMANN_ALEF_CORE_TYPES_NUMERICS_H
 #define WINGMANN_ALEF_CORE_TYPES_NUMERICS_H
 
-#include "alef/core.h"
+#include "alef/alef.h"
 
 namespace alf::types {
 

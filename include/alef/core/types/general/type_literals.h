@@ -1,7 +1,7 @@
 #ifndef ALEF_CORE_TYPES_GENERAL_TYPE_LITERALS_H
 #define ALEF_CORE_TYPES_GENERAL_TYPE_LITERALS_H
 
-#include "alef/core/types/general/primitives.h"
+#include "alef/core/types/general/basic.h"
 
 namespace alf {
 

@@ -1,4 +1,4 @@
-#include <alef/core.h>
+#include <alef/alef.h>
 #include <alef/lib/concepts/logic.h>
 
 #include <gtest/gtest.h>
