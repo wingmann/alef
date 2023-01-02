@@ -1,5 +1,5 @@
-#ifndef ALEF_CORE_IO_MANIPULATIONS_H
-#define ALEF_CORE_IO_MANIPULATIONS_H
+#ifndef ALEF_CORE_IO_MANIP_H
+#define ALEF_CORE_IO_MANIP_H
 
 #include <iostream>
 #include <iomanip>
@@ -11,4 +11,4 @@ using std::ends;
 
 } // namespace alf
 
-#endif // ALEF_CORE_IO_MANIPULATIONS_H
+#endif // ALEF_CORE_IO_MANIP_H

@@ -1,12 +1,12 @@
-#ifndef ALEF_CORE_UTILITY_STRINGS_H
-#define ALEF_CORE_UTILITY_STRINGS_H
+#ifndef ALEF_CORE_STRING_ALGORITHMS_UTILITY_H
+#define ALEF_CORE_STRING_ALGORITHMS_UTILITY_H
 
 #include "alef/core/string/string.h"
 #include "alef/core/string/string_stream.h"
 
 #include <vector>
 
-namespace alf::strings {
+namespace alf::algo::str {
 
 std::vector<alf::string> split(const alf::string& text, char delimiter)
 {
@@ -20,6 +20,6 @@ std::vector<alf::string> split(const alf::string& text, char delimiter)
     return data;
 }
 
-} // namespace alf::string
+} // namespace alf::algo::str
 
-#endif // ALEF_CORE_UTILITY_STRINGS_H
+#endif // ALEF_CORE_STRING_ALGORITHMS_UTILITY_H

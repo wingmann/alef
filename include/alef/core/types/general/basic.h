@@ -40,7 +40,6 @@ using f128      = alf::core::types::general::__detail::floating_point::__f128;
 // Character ---------------------------------------------------------------------------------------
 using schar     = alf::core::types::general::__detail::character::__schar;
 using uchar     = alf::core::types::general::__detail::character::__uchar;
-using character = alf::core::types::general::__detail::character::__character;
 using wchar     = alf::core::types::general::__detail::character::__wchar;
 using char8     = alf::core::types::general::__detail::character::__char8;
 using char16    = alf::core::types::general::__detail::character::__char16;

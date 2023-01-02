@@ -1,5 +1,5 @@
-#ifndef WINGMANN_ALEF_INCLUDE_ALEF_CORE_STRING_STRING_VIEW_H
-#define WINGMANN_ALEF_INCLUDE_ALEF_CORE_STRING_STRING_VIEW_H
+#ifndef ALEF_CORE_STRING_STRING_VIEW_H
+#define ALEF_CORE_STRING_STRING_VIEW_H
 
 #include "alef/core/string/__detail.h"
 
@@ -44,4 +44,4 @@ constexpr auto operator""_sv(const alf::char32* str, alf::usize length)
 
 } // namespace alf
 
-#endif //WINGMANN_ALEF_INCLUDE_ALEF_CORE_STRING_STRING_VIEW_H
+#endif // ALEF_CORE_STRING_STRING_VIEW_H

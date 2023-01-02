@@ -5,7 +5,6 @@ namespace alf::core::types::general::__detail::character {
 
 using __schar     = signed char;
 using __uchar     = unsigned char;
-using __character = char;
 using __wchar     = wchar_t;
 using __char8     = char8_t;
 using __char16    = char16_t;

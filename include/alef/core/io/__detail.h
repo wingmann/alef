@@ -2,7 +2,7 @@
 #define ALEF_CORE_IO_DETAIL_STREAMS_H
 
 #include "alef/core/types/general/basic.h"
-#include "alef/core/io/manipulations.h"
+#include "alef/core/io/manip.h"
 
 #include <fstream>
 #include <sstream>
