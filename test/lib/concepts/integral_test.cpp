@@ -3,24 +3,22 @@
 
 #include <gtest/gtest.h>
 
-using namespace alf::concepts::numeric;
-
-auto is_numeric_integral = [](integral auto value)
+auto is_numeric_integral = [](alf::concepts::numeric::integral auto value)
 {
     return true;
 };
 
-auto is_numeric_signed_integral = [](signed_integral auto value)
+auto is_numeric_signed_integral = [](alf::concepts::numeric::signed_integral auto value)
 {
     return true;
 };
 
-auto is_numeric_unsigned_integral = [](unsigned_integral auto value)
+auto is_numeric_unsigned_integral = [](alf::concepts::numeric::unsigned_integral auto value)
 {
     return true;
 };
 
-TEST(alef_core_concepts, numeric_integral)
+TEST(alef_lib_concepts_integral, init)
 {
     EXPECT_TRUE(is_numeric_integral(alf::i8{}));
     EXPECT_TRUE(is_numeric_integral(alf::ui8{}));
@@ -32,7 +30,7 @@ TEST(alef_core_concepts, numeric_integral)
     EXPECT_TRUE(is_numeric_integral(alf::ui64{}));
 }
 
-TEST(alef_core_concepts, numeric_signed_integral)
+TEST(alef_lib_concepts_integral, signed_init)
 {
     EXPECT_TRUE(is_numeric_signed_integral(alf::i8{}));
     EXPECT_TRUE(is_numeric_signed_integral(alf::i16{}));
@@ -40,7 +38,7 @@ TEST(alef_core_concepts, numeric_signed_integral)
     EXPECT_TRUE(is_numeric_signed_integral(alf::i64{}));
 }
 
-TEST(alef_core_concepts, numeric_unsigned_integral)
+TEST(alef_lib_concepts_integral, unsigned_init)
 {
     EXPECT_TRUE(is_numeric_unsigned_integral(alf::ui8{}));
     EXPECT_TRUE(is_numeric_unsigned_integral(alf::ui16{}));

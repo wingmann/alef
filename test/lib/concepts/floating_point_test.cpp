@@ -3,14 +3,12 @@
 
 #include <gtest/gtest.h>
 
-using namespace alf::concepts::numeric;
-
-auto is_numeric_floating_point = [](floating_point auto value)
+auto is_numeric_floating_point = [](alf::concepts::numeric::floating_point auto value)
 {
     return true;
 };
 
-TEST(alef_core_concepts, numeric_floating_point)
+TEST(alef_lib_concepts_numeric_floating_point, init)
 {
     EXPECT_TRUE(is_numeric_floating_point(alf::f32{}));
     EXPECT_TRUE(is_numeric_floating_point(alf::f64{}));

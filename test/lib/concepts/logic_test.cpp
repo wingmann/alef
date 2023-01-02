@@ -3,24 +3,22 @@
 
 #include <gtest/gtest.h>
 
-using namespace alf::concepts::logic;
-
-auto is_boolean = [](boolean auto value)
+auto is_boolean = [](alf::concepts::logic::boolean auto value)
 {
     return true;
 };
 
-auto is_not_boolean = [](not_boolean auto value)
+auto is_not_boolean = [](alf::concepts::logic::not_boolean auto value)
 {
     return true;
 };
 
-TEST(alef_core_concepts, boolean)
+TEST(alef_lib_concepts_logic, boolean)
 {
     EXPECT_TRUE(is_boolean(bool{}));
 }
 
-TEST(alef_core_concepts, not_boolean)
+TEST(alef_lib_concepts_logic, not_boolean)
 {
     EXPECT_TRUE(is_not_boolean(alf::i32{}));
 }

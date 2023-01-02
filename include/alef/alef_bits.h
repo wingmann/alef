@@ -7,7 +7,7 @@
 // Libraries.
 #include "alef/lib/concepts.h"
 #include "alef/lib/containers.h"
-#include "alef/lib/error.h"
+#include "alef/lib/err_fusion.h"
 #include "alef/lib/iterators.h"
 #include "alef/lib/numerics.h"
 #include "alef/lib/serializing.h"

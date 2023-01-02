@@ -3,14 +3,12 @@
 
 #include <gtest/gtest.h>
 
-using namespace alf::concepts::numeric;
-
-auto is_numeric_number = [](number auto value)
+auto is_numeric_number = [](alf::concepts::numeric::number auto value)
 {
     return true;
 };
 
-TEST(alef_core_concepts, numeric_number)
+TEST(alef_lib_concepts_number, init)
 {
     EXPECT_TRUE(is_numeric_number(alf::i8{}));
     EXPECT_TRUE(is_numeric_number(alf::ui8{}));

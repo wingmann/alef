@@ -8,7 +8,7 @@ file(GLOB PROJECT_SOURCES
     "${CMAKE_CURRENT_SOURCE_DIR}/*/*/*/*/*/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/*/*/*/*/*/*/*.cpp")
 
-add_executable(${PROJECT_NAME} ${PROJECT_SOURCES} ../include/alef/core/math/__detail.h ../include/alef/core/math/utility.h ../include/alef/core/math/consts.h)
+add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
 
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
