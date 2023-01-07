@@ -1,37 +1,25 @@
 #ifndef ALEF_CORE_SERIALIZING_JSON_JSON_H
 #define ALEF_CORE_SERIALIZING_JSON_JSON_H
 
-#include "backing_data.h"
-
 #include "alef/alef.h"
 #include "alef/core/string/string.h"
 #include "alef/core/string/string_stream.h"
-
-#include "alef/lib/concepts.h"
+#include "alef/core/types/serializing/json.h"
+#include "alef/lib/concepts/general.h"
+#include "alef/lib/serializing/json/__detail/backing_data.h"
 
 #include <initializer_list>
 #include <iomanip>
 #include <limits>
-#include <sstream>
 
 namespace alf::serializing {
 
 class json {
-    __json_detail::backing_data internal_{};
-
 public:
-    /// @brief
-    enum class class_type {
-        null,
-        object,
-        array,
-        string,
-        floating,
-        integral,
-        boolean
-    };
+    using class_type = alf::types::serializing::json_class;
 
 private:
+    alf::serializing::__detail::json::backing_data internal_{};
     class_type type_{class_type::null};
 
 public:
@@ -54,7 +42,7 @@ public:
         }
     }
 
-    json(std::initializer_list<json> list) :json{}
+    json(std::initializer_list<json> list) : json{}
     {
         set_type(class_type::object);
 
@@ -72,12 +60,12 @@ public:
     {
         switch (other.type_) {
         case class_type::object:
-            this->internal_.json_map = new __json_detail::map_type{
+            this->internal_.json_map = new alf::serializing::__detail::json::map_type{
                 other.internal_.json_map->begin(),
                 other.internal_.json_map->end()};
             break;
         case class_type::array:
-            this->internal_.json_list = new __json_detail::list_type{
+            this->internal_.json_list = new alf::serializing::__detail::json::list_type{
                 other.internal_.json_list->begin(),
                 other.internal_.json_list->end()};
             break;
@@ -111,7 +99,7 @@ public:
     /// @brief Constructs from floating.
     template<alf::concepts::floating_point T>
     explicit json(T value)
-        : internal_{static_cast<double>(value)}, type_{class_type::floating}
+        : internal_{static_cast<alf::f64>(value)}, type_{class_type::floating}
     {
     }
 
@@ -121,10 +109,10 @@ public:
     {
         switch (value) {
         case class_type::object:
-            this->internal_.json_map = new __json_detail::map_type{};
+            this->internal_.json_map = new alf::serializing::__detail::json::map_type{};
             break;
         case class_type::array:
-            this->internal_.json_list = new __json_detail::list_type{};
+            this->internal_.json_list = new alf::serializing::__detail::json::list_type{};
             break;
         case class_type::string:
             this->internal_.json_string = new alf::string{};
@@ -160,12 +148,12 @@ public:
 
         switch (other.type_) {
         case class_type::object:
-            this->internal_.json_map = new __json_detail::map_type{
+            this->internal_.json_map = new alf::serializing::__detail::json::map_type{
                 other.internal_.json_map->begin(),
                 other.internal_.json_map->end()};
             break;
         case class_type::array:
-            this->internal_.json_list = new __json_detail::list_type{
+            this->internal_.json_list = new alf::serializing::__detail::json::list_type{
                 other.internal_.json_list->begin(),
                 other.internal_.json_list->end()};
             break;
@@ -328,8 +316,8 @@ public:
     alf::string to_string(bool&& ok) const
     {
         return (ok = this->type_ == class_type::string)
-               ? json_escape(*this->internal_.json_string)
-               : alf::string{};
+            ? json_escape(*this->internal_.json_string)
+            : alf::string{};
     }
 
     [[nodiscard]]
@@ -340,7 +328,9 @@ public:
 
     double to_float(bool&& ok) const
     {
-        return (ok = this->type_ == class_type::floating) ? this->internal_.json_float : double{};
+        return (ok = this->type_ == class_type::floating)
+            ? this->internal_.json_float
+            : alf::f64{};
     }
 
     [[nodiscard]]
@@ -353,7 +343,7 @@ public:
     {
         return (ok = this->type_ == class_type::integral)
             ? this->internal_.json_int
-            : __json_detail::int_type{};
+            : alf::serializing::__detail::json::int_type{};
     }
 
     [[nodiscard]]
@@ -371,30 +361,30 @@ public:
     auto array_range() const
     {
         return (this->type_ == class_type::array)
-               ? __json_detail::const_list_wrapper_type{this->internal_.json_list}
-               : __json_detail::const_list_wrapper_type{nullptr};
+            ? alf::serializing::__detail::json::const_list_wrapper_type{this->internal_.json_list}
+            : alf::serializing::__detail::json::const_list_wrapper_type{nullptr};
     }
 
     auto array_range()
     {
         return (this->type_ == class_type::array)
-               ? __json_detail::list_wrapper_type{this->internal_.json_list}
-               : __json_detail::list_wrapper_type{nullptr};
+            ? alf::serializing::__detail::json::list_wrapper_type{this->internal_.json_list}
+            : alf::serializing::__detail::json::list_wrapper_type{nullptr};
     }
 
     [[nodiscard]]
     auto object_range() const
     {
         return (this->type_ == class_type::array)
-               ? __json_detail::const_map_wrapper_type{this->internal_.json_map}
-               : __json_detail::const_map_wrapper_type{nullptr};
+            ? alf::serializing::__detail::json::const_map_wrapper_type{this->internal_.json_map}
+            : alf::serializing::__detail::json::const_map_wrapper_type{nullptr};
     }
 
     auto object_range()
     {
         return (this->type_ == class_type::object)
-               ? __json_detail::map_wrapper_type{this->internal_.json_map}
-               : __json_detail::map_wrapper_type{nullptr};
+            ? alf::serializing::__detail::json::map_wrapper_type{this->internal_.json_map}
+            : alf::serializing::__detail::json::map_wrapper_type{nullptr};
     }
 
     [[nodiscard]]
@@ -504,19 +494,19 @@ private:
             this->internal_.json_map = nullptr;
             break;
         case class_type::object:
-            this->internal_.json_map = new __json_detail::map_type{};
+            this->internal_.json_map = new alf::serializing::__detail::json::map_type{};
             break;
         case class_type::array:
-            this->internal_.json_list = new __json_detail::list_type{};
+            this->internal_.json_list = new alf::serializing::__detail::json::list_type{};
             break;
         case class_type::string:
             this->internal_.json_string = new alf::string{};
             break;
         case class_type::floating:
-            this->internal_.json_float = double{};
+            this->internal_.json_float = alf::f64{};
             break;
         case class_type::integral:
-            this->internal_.json_int = __json_detail::int_type{};
+            this->internal_.json_int = alf::serializing::__detail::json::int_type{};
             break;
         case class_type::boolean:
             this->internal_.json_bool = false;
@@ -675,9 +665,12 @@ public:
                 for (auto i = 1_ui32; i <= 4; ++i) {
                     c = str[offset + i];
 
-                    if (((c >= '0') && (c <= '9')) || ((c >= 'a') && (c <= 'f')) ||
-                        ((c >= 'A') && (c <= 'F')))
-                    {
+                    auto correct =
+                        (((c >= '0') && (c <= '9')) ||
+                         ((c >= 'a') && (c <= 'f')) ||
+                         ((c >= 'A') && (c <= 'F')));
+
+                    if (correct) {
                         ss << c;
                     }
                     else {
@@ -704,10 +697,10 @@ public:
     {
         json number;
         alf::string_stream ss;
-        alf::string_stream expression_value;
+        alf::string_stream expr_value;
         char c;
         bool is_floating{};
-        __json_detail::int_type exp{};
+        alf::serializing::__detail::json::int_type exp{};
 
         while (true) {
             if (c = str[offset++]; (c == '-') || ((c >= '0') && (c <= '9'))) {
@@ -727,13 +720,13 @@ public:
 
             if (c == '-') {
                 ++offset;
-                expression_value << '-';
+                expr_value << '-';
             }
             while (true) {
                 c = str[offset++];
 
                 if (c >= '0' && c <= '9') {
-                    expression_value << c;
+                    expr_value << c;
                 }
                 else if (!isspace(c) && (c != ',') && (c != ']') && (c != '}')) {
                     alf::string_stream es;
@@ -745,7 +738,7 @@ public:
                     break;
                 }
             }
-            exp = std::stoll(expression_value.str());
+            exp = std::stoll(expr_value.str());
         }
         else if (!isspace(c) && (c != ',') && (c != ']') && (c != '}')) {
             alf::string_stream es;
@@ -759,9 +752,15 @@ public:
             number = std::stod(ss.str()) * std::pow(10, exp);
         }
         else {
-            number = (!expression_value.str().empty())
-                ? static_cast<__json_detail::float_type>(std::stoll(ss.str())) * std::pow(10, exp)
-                : static_cast<__json_detail::float_type>(std::stoll(ss.str()));
+            if (!expr_value.str().empty()) {
+                number = static_cast<alf::serializing::__detail::json::float_type>(
+                    std::stoll(ss.str())) *
+                        std::pow(10, exp);
+            }
+            else {
+                number = static_cast<alf::serializing::__detail::json::float_type>(
+                    std::stoll(ss.str()));
+            }
         }
         return number;
     }

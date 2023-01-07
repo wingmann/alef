@@ -1,9 +1,9 @@
 #ifndef WINGMANN_ALEF_INCLUDE_ALEF_CORE_SERIALIZING_JSON_BACKING_DATA_H
 #define WINGMANN_ALEF_INCLUDE_ALEF_CORE_SERIALIZING_JSON_BACKING_DATA_H
 
-#include "types.h"
+#include "alef/lib/serializing/json/__detail/types.h"
 
-namespace alf::serializing::__json_detail {
+namespace alf::serializing::__detail::json {
 
 union backing_data {
     list_type*   json_list;
@@ -32,6 +32,6 @@ union backing_data {
     }
 };
 
-} // namespace alf::serializing::__json_detail
+} // namespace alf::serializing::__detail::json
 
 #endif //WINGMANN_ALEF_INCLUDE_ALEF_CORE_SERIALIZING_JSON_BACKING_DATA_H

@@ -3,7 +3,7 @@
 
 #include <utility>
 
-namespace alf::serializing::__json_detail {
+namespace alf::serializing::__detail::json {
 
 template<typename Container>
 class json_wrapper {
@@ -42,6 +42,6 @@ public:
     }
 };
 
-} // alf::serializing::__json_detail
+} // namespace alf::serializing::__detail::json
 
 #endif // ALEF_CORE_SERIALIZING_JSON_WRAPPER_H
