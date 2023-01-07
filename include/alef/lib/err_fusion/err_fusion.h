@@ -1,7 +1,8 @@
 #ifndef ALEF_LIB_ERR_FUSION_ERR_FUSION_H
 #define ALEF_LIB_ERR_FUSION_ERR_FUSION_H
 
-#include "__detail.h"
+#include "alef/lib/err_fusion/__detail/general.h"
+#include "alef/lib/err_fusion/__detail/operators.h"
 
 namespace alf::ef {
 
