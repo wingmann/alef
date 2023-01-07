@@ -63,7 +63,7 @@ public:
     /// @brief Constructs from integral.
     /// @param value Integral value.
     ///
-    big_integer(concepts::integral auto value)
+    big_integer(alf::concepts::integral auto value)
     {
         *this = std::to_string(value);
     }
@@ -940,7 +940,7 @@ public:
     /// @tparam value Integral value.
     /// @return       Constructed value.
     ///
-    static big_integer value_from(concepts::integral auto value)
+    static big_integer value_from(alf::concepts::integral auto value)
     {
         return std::to_string(value);
     }
@@ -965,7 +965,7 @@ public:
 
 protected:
     // Safely converts to integral value.
-    template<concepts::signed_integral T>
+    template<alf::concepts::signed_integral T>
     std::optional<T> safe_convert(
         alf::types::radix radix,
         T (* func)(const alf::string&, usize*, i32)) const
@@ -986,7 +986,7 @@ public:
     /// @param radix The base of a system of number.
     /// @return      If converted, then integral value otherwise std::nullopt
     ///
-    template<concepts::signed_integral T>
+    template<alf::concepts::signed_integral T>
     std::optional<T> to_integer(alf::types::radix radix = alf::types::radix::decimal) const;
 
     template<>
