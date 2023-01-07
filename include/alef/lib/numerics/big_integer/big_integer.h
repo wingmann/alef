@@ -29,9 +29,12 @@ namespace alf::numerics {
 
 /// @brief Arbitrarily large integer.
 class big_integer {
+public:
+    using radix_type = alf::types::numerics::radix;
+
 protected:
     // The base of a system of number.
-    alf::types::radix radix_{alf::types::radix::decimal};
+    radix_type radix_{radix_type::decimal};
 
     // Sign flag.
     bool signed_{};
@@ -73,7 +76,7 @@ public:
     /// @param value alf::string literal value.
     /// @param radix The base of a system of number.
     ///
-    big_integer(const char* value, alf::types::radix radix = alf::types::radix::decimal)
+    big_integer(const char* value, radix_type radix = radix_type::decimal)
         : radix_{radix}
     {
         *this = alf::string{value};
@@ -84,7 +87,7 @@ public:
     /// @param value alf::string value.
     /// @param radix The base of a system of number.
     ///
-    big_integer(alf::string value, alf::types::radix radix = alf::types::radix::decimal)
+    big_integer(alf::string value, radix_type radix = radix_type::decimal)
         : radix_{radix}
     {
         *this = std::move(value);
@@ -154,7 +157,7 @@ public:
 
         remove_leading_zeros(value);
 
-        if (this->radix_ == alf::types::radix::decimal)
+        if (this->radix_ == radix_type::decimal)
             this->value_ = std::move(value);
         else
             this->value_ = convert_to_base_ten(value, this->radix_);
@@ -295,12 +298,12 @@ public:
         if (rhs.is_negative())
             throw std::invalid_argument("negative value");
 
-        auto bitwise_value = this->to_string(alf::types::radix::binary);
+        auto bitwise_value = this->to_string(radix_type::binary);
 
         for (auto i = 0; i < rhs; ++i)
             bitwise_value.push_back('0');
 
-        return {std::move(bitwise_value), alf::types::radix::binary};
+        return {std::move(bitwise_value), radix_type::binary};
     }
 
     /// @brief Shifts the current value to right on right operand value.
@@ -314,7 +317,7 @@ public:
         if (rhs.is_negative())
             throw std::invalid_argument("negative value");
 
-        auto bitwise_value = this->to_string(alf::types::radix::binary);
+        auto bitwise_value = this->to_string(radix_type::binary);
 
         for (auto i = 0; (i < rhs) && (bitwise_value.length() > 0); ++i)
             bitwise_value.pop_back();
@@ -322,7 +325,7 @@ public:
         if (bitwise_value.empty())
             bitwise_value.push_back('0');
 
-        return {std::move(bitwise_value), alf::types::radix::binary};
+        return {std::move(bitwise_value), radix_type::binary};
     }
 
     // Shift operators -----------------------------------------------------------------------------
@@ -873,7 +876,7 @@ public:
     [[nodiscard]]
     usize bit_length() const
     {
-        return to_string(alf::types::radix::binary).length();
+        return to_string(radix_type::binary).length();
     }
 
     /// @brief Checks for value sign.
@@ -967,7 +970,7 @@ protected:
     // Safely converts to integral value.
     template<alf::concepts::signed_integral T>
     std::optional<T> safe_convert(
-        alf::types::radix radix,
+        radix_type radix,
         T (* func)(const alf::string&, usize*, i32)) const
     {
         try {
@@ -987,15 +990,15 @@ public:
     /// @return      If converted, then integral value otherwise std::nullopt
     ///
     template<alf::concepts::signed_integral T>
-    std::optional<T> to_integer(alf::types::radix radix = alf::types::radix::decimal) const;
+    std::optional<T> to_integer(radix_type radix = radix_type::decimal) const;
 
     template<>
     [[nodiscard]]
-    std::optional<i8> to_integer(alf::types::radix radix) const = delete;
+    std::optional<i8> to_integer(radix_type radix) const = delete;
 
     template<>
     [[nodiscard]]
-    std::optional<i16> to_integer(alf::types::radix radix) const = delete;
+    std::optional<i16> to_integer(radix_type radix) const = delete;
 
     /// @brief Converts to integral value.
     ///
@@ -1005,7 +1008,7 @@ public:
     ///
     template<>
     [[nodiscard]]
-    std::optional<i32> to_integer(alf::types::radix radix) const
+    std::optional<i32> to_integer(radix_type radix) const
     {
         return safe_convert(radix, std::stoi);
     }
@@ -1018,7 +1021,7 @@ public:
     ///
     template<>
     [[nodiscard]]
-    std::optional<i64> to_integer(alf::types::radix radix) const
+    std::optional<i64> to_integer(radix_type radix) const
     {
 #if defined(__WORDSIZE) && __WORDSIZE == 64
         return safe_convert(radix, std::stol);
@@ -1034,14 +1037,14 @@ public:
     /// @return      alf::string representation of current value.
     ///
     [[nodiscard]]
-    alf::string to_string(alf::types::radix radix = alf::types::radix::decimal) const
+    alf::string to_string(radix_type radix = radix_type::decimal) const
     {
         alf::string_stream ss;
 
         if (this->is_negative())
             ss << '-';
 
-        if (radix == alf::types::radix::decimal)
+        if (radix == radix_type::decimal)
             ss << this->value_;
         else
             ss << convert_from_base_ten(*this, radix);
@@ -1053,21 +1056,21 @@ private:
     // Sets the default value for an object whose state has been moved.
     static void set_default(big_integer& moved)
     {
-        moved.radix_ = alf::types::radix::decimal;
+        moved.radix_ = radix_type::decimal;
         moved.signed_ = false;
         moved.value_ = "0";
     }
 
     // Checks for value is valid.
-    static bool is_valid_number(const alf::string& value, alf::types::radix radix)
+    static bool is_valid_number(const alf::string& value, radix_type radix)
     {
         std::pair range{'0', '9'};
 
-        if (radix == alf::types::radix::binary)
+        if (radix == radix_type::binary)
             range.second = '1';
-        else if (radix == alf::types::radix::octal)
+        else if (radix == radix_type::octal)
             range.second = '7';
-        else if (radix == alf::types::radix::hexadecimal)
+        else if (radix == radix_type::hexadecimal)
             range.second = 'F';
 
         return std::ranges::all_of(value, [=](const auto c) {
@@ -1105,7 +1108,7 @@ private:
     // Converts not base ten value to string.
     static alf::string convert_from_base_ten(
         const big_integer& value,
-        const alf::types::radix radix)
+        const radix_type radix)
     {
         auto decimal_value{value};
         auto modulo = value_from(static_cast<ui8>(radix));
@@ -1125,7 +1128,7 @@ private:
     }
 
     // Converts string value to base ten.
-    static alf::string convert_to_base_ten(const alf::string& value, alf::types::radix radix)
+    static alf::string convert_to_base_ten(const alf::string& value, radix_type radix)
     {
         auto last = char_to_digit(value.back());
         auto length = value.length();
