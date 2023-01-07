@@ -55,7 +55,7 @@ enum class character_type : ui8 {
     char32    = static_cast<alf::ui8>(basic_type::char32),
 };
 
-template<concepts::any::primitive T>
+template<concepts::primitive T>
 class type_id {
 public:
     basic_type operator()();

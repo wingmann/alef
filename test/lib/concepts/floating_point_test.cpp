@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-auto is_numeric_floating_point = [](alf::concepts::numeric::floating_point auto value)
+auto is_numeric_floating_point = [](alf::concepts::floating_point auto value)
 {
     return true;
 };

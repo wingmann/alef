@@ -3,11 +3,11 @@
 
 #include "__detail.h"
 
-namespace alf::concepts::chars {
+namespace alf::concepts {
 
 template<typename T>
 concept character = alf::concepts::__detail::is_character_v<T>;
 
-} // namespace alf::concepts::chars
+} // namespace alf::concepts
 
 #endif // ALEF_CORE_CONCEPTS_CHARS_H

@@ -3,7 +3,7 @@
 
 #include "general.h"
 
-namespace alf::concepts::logic {
+namespace alf::concepts {
 
 template<typename T>
 concept boolean = alf::concepts::same_as<T, bool>;
@@ -11,6 +11,6 @@ concept boolean = alf::concepts::same_as<T, bool>;
 template<typename T>
 concept not_boolean = !boolean<T>;
 
-} // namespace alf::concepts::logic
+} // namespace alf::concepts
 
 #endif // ALEF_CORE_CONCEPTS_LOGIC_H

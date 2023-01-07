@@ -3,17 +3,17 @@
 
 #include <gtest/gtest.h>
 
-auto is_numeric_integral = [](alf::concepts::numeric::integral auto value)
+auto is_numeric_integral = [](alf::concepts::integral auto value)
 {
     return true;
 };
 
-auto is_numeric_signed_integral = [](alf::concepts::numeric::signed_integral auto value)
+auto is_numeric_signed_integral = [](alf::concepts::signed_integral auto value)
 {
     return true;
 };
 
-auto is_numeric_unsigned_integral = [](alf::concepts::numeric::unsigned_integral auto value)
+auto is_numeric_unsigned_integral = [](alf::concepts::unsigned_integral auto value)
 {
     return true;
 };

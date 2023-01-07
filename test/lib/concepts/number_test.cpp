@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-auto is_numeric_number = [](alf::concepts::numeric::number auto value)
+auto is_numeric_number = [](alf::concepts::number auto value)
 {
     return true;
 };

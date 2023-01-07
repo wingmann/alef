@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-auto is_character = [](alf::concepts::chars::character auto value)
+auto is_character = [](alf::concepts::character auto value)
 {
     return true;
 };

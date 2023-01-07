@@ -3,12 +3,12 @@
 
 #include <gtest/gtest.h>
 
-auto is_boolean = [](alf::concepts::logic::boolean auto value)
+auto is_boolean = [](alf::concepts::boolean auto value)
 {
     return true;
 };
 
-auto is_not_boolean = [](alf::concepts::logic::not_boolean auto value)
+auto is_not_boolean = [](alf::concepts::not_boolean auto value)
 {
     return true;
 };

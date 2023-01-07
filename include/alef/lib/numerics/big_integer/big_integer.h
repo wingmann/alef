@@ -13,17 +13,16 @@
 #define ALEF_CORE_NUMERICS_BIG_INTEGER_H
 
 #include "alef/alef.h"
+#include "alef/core/io/streams.h"
 #include "alef/core/string/string.h"
+#include "alef/core/string/string_stream.h"
 #include "alef/core/types/numerics/radix.h"
-
 #include "alef/lib/concepts.h"
 
 #include <algorithm>
 #include <cmath>
 #include <optional>
-#include <ostream>
 #include <ranges>
-#include <sstream>
 #include <vector>
 
 namespace alf::numerics {
@@ -37,7 +36,7 @@ protected:
     // Sign flag.
     bool signed_{};
 
-    // std::string representation of decimal value.
+    // alf::string representation of decimal value.
     alf::string value_{"0"};
 
 public:
@@ -64,28 +63,28 @@ public:
     /// @brief Constructs from integral.
     /// @param value Integral value.
     ///
-    big_integer(concepts::numeric::integral auto value)
+    big_integer(concepts::integral auto value)
     {
         *this = std::to_string(value);
     }
 
     /// @brief Constructs from string literal.
     ///
-    /// @param value std::string literal value.
+    /// @param value alf::string literal value.
     /// @param radix The base of a system of number.
     ///
     big_integer(const char* value, alf::types::radix radix = alf::types::radix::decimal)
         : radix_{radix}
     {
-        *this = std::string{value};
+        *this = alf::string{value};
     }
 
     /// @brief Constructs from string.
     ///
-    /// @param value std::string value.
+    /// @param value alf::string value.
     /// @param radix The base of a system of number.
     ///
-    big_integer(std::string value, alf::types::radix radix = alf::types::radix::decimal)
+    big_integer(alf::string value, alf::types::radix radix = alf::types::radix::decimal)
         : radix_{radix}
     {
         *this = std::move(value);
@@ -121,7 +120,7 @@ public:
     /// @param rhs An integral rhs.
     /// @return    Constructed object.
     ///
-    big_integer& operator=(concepts::numeric::integral auto rhs)
+    big_integer& operator=(concepts::integral auto rhs)
     {
         *this = std::to_string(rhs);
         return *this;
@@ -134,7 +133,7 @@ public:
     ///
     big_integer& operator=(const char* rhs)
     {
-        *this = std::string{rhs};
+        *this = alf::string{rhs};
         return *this;
     }
 
@@ -143,7 +142,7 @@ public:
     /// @param value The value from which to construct.
     /// @return      Constructed object.
     ///
-    big_integer& operator=(std::string value)
+    big_integer& operator=(alf::string value)
     {
         this->signed_ = value.starts_with('-');
 
@@ -468,8 +467,10 @@ public:
 
         for (char& lhs_char : lhs_value) {
             lhs_char = static_cast<char>(
-                (carry - min_value) + (lhs_char - min_value) + (rhs_value.at(index) - min_value) +
-                    min_value);
+                (carry - min_value) +
+                (lhs_char - min_value) +
+                (rhs_value.at(index) - min_value) +
+                min_value);
 
             if (lhs_char > max_value) {
                 lhs_char -= 10;
@@ -510,8 +511,8 @@ public:
 
         bool inverted_sign = (this->compare(rhs) == std::strong_ordering::less);
 
-        std::string subtracted = inverted_sign ? rhs.value_ : this->value_;
-        std::string removed = inverted_sign ? this->value_ : rhs.value_;
+        alf::string subtracted = inverted_sign ? rhs.value_ : this->value_;
+        alf::string removed = inverted_sign ? this->value_ : rhs.value_;
 
         auto diff_length = std::abs(static_cast<i32>(subtracted.length() - removed.length()));
 
@@ -568,7 +569,7 @@ public:
         auto temp = value_from(0);
 
         for (const auto& lhs_char : lhs_value) {
-            auto operation = std::string{}.insert(0, index, min_value);
+            auto operation = alf::string{}.insert(0, index, min_value);
 
             for (const auto& rhs_char : rhs_value) {
                 ui8 result = ((lhs_char - min_value) * (rhs_char - min_value)) +
@@ -619,8 +620,8 @@ public:
 
         auto rhs_abs = rhs.abs();
 
-        std::string lhs_quotient;
-        std::string rhs_quotient;
+        alf::string lhs_quotient;
+        alf::string rhs_quotient;
 
         do {
             lhs_quotient.push_back(lhs_value.back());
@@ -728,7 +729,7 @@ public:
         if (this->is_negative())
             return this->value_;
 
-        std::stringstream ss;
+        alf::string_stream ss;
         ss << '-' << this->value_;
 
         return ss.str();
@@ -912,7 +913,7 @@ public:
     /// @param value The value to put to output.
     /// @return      Output stream.
     ///
-    friend std::ostream& operator<<(std::ostream& os, const big_integer& value)
+    friend alf::io::output_stream& operator<<(alf::io::output_stream& os, const big_integer& value)
     {
         os << value.to_string();
         return os;
@@ -924,9 +925,9 @@ public:
     /// @param value The value for writing from input stream.
     /// @return      Input stream.
     ///
-    friend std::istream& operator>>(std::istream& is, big_integer& value)
+    friend alf::io::input_stream& operator>>(alf::io::input_stream& is, big_integer& value)
     {
-        std::string input;
+        alf::string input;
         is >> input;
         value = input;
         return is;
@@ -939,17 +940,17 @@ public:
     /// @tparam value Integral value.
     /// @return       Constructed value.
     ///
-    static big_integer value_from(concepts::numeric::integral auto value)
+    static big_integer value_from(concepts::integral auto value)
     {
         return std::to_string(value);
     }
 
     /// @brief Creates value from string value.
     ///
-    /// @tparam value std::string value.
+    /// @tparam value alf::string value.
     /// @return       Constructed value.
     ///
-    static big_integer value_from(std::string value)
+    static big_integer value_from(alf::string value)
     {
         return std::move(value);
     }
@@ -964,10 +965,10 @@ public:
 
 protected:
     // Safely converts to integral value.
-    template<concepts::numeric::signed_integral T>
+    template<concepts::signed_integral T>
     std::optional<T> safe_convert(
         alf::types::radix radix,
-        T (* func)(const std::string&, usize*, i32)) const
+        T (* func)(const alf::string&, usize*, i32)) const
     {
         try {
             return func(this->to_string(radix), nullptr, static_cast<int>(radix));
@@ -985,7 +986,7 @@ public:
     /// @param radix The base of a system of number.
     /// @return      If converted, then integral value otherwise std::nullopt
     ///
-    template<concepts::numeric::signed_integral T>
+    template<concepts::signed_integral T>
     std::optional<T> to_integer(alf::types::radix radix = alf::types::radix::decimal) const;
 
     template<>
@@ -1030,12 +1031,12 @@ public:
     /// @brief Converts to string representation.
     ///
     /// @param radix The base of a system of number.
-    /// @return      std::string representation of current value.
+    /// @return      alf::string representation of current value.
     ///
     [[nodiscard]]
-    std::string to_string(alf::types::radix radix = alf::types::radix::decimal) const
+    alf::string to_string(alf::types::radix radix = alf::types::radix::decimal) const
     {
-        std::stringstream ss;
+        alf::string_stream ss;
 
         if (this->is_negative())
             ss << '-';
@@ -1058,7 +1059,7 @@ private:
     }
 
     // Checks for value is valid.
-    static bool is_valid_number(const std::string& value, alf::types::radix radix)
+    static bool is_valid_number(const alf::string& value, alf::types::radix radix)
     {
         std::pair range{'0', '9'};
 
@@ -1075,13 +1076,13 @@ private:
     }
 
     // Removes first char if its sign.
-    static void remove_sign(std::string& value)
+    static void remove_sign(alf::string& value)
     {
         value.erase(0, 1);
     }
 
     // Removes leading not significant zeros.
-    static void remove_leading_zeros(std::string& value)
+    static void remove_leading_zeros(alf::string& value)
     {
         while (value.starts_with('0') && (value.length() != 1))
             value.erase(0, 1);
@@ -1096,20 +1097,20 @@ private:
     }
 
     // Returns the base char values of a system of number.
-    static std::string base_chars()
+    static alf::string base_chars()
     {
         return "0123456789ABCDEF";
     }
 
     // Converts not base ten value to string.
-    static std::string convert_from_base_ten(
+    static alf::string convert_from_base_ten(
         const big_integer& value,
         const alf::types::radix radix)
     {
         auto decimal_value{value};
         auto modulo = value_from(static_cast<ui8>(radix));
 
-        std::string result;
+        alf::string result;
 
         while (!decimal_value.equal(0)) {
             auto remainder = decimal_value.mod(modulo);
@@ -1124,7 +1125,7 @@ private:
     }
 
     // Converts string value to base ten.
-    static std::string convert_to_base_ten(const std::string& value, alf::types::radix radix)
+    static alf::string convert_to_base_ten(const alf::string& value, alf::types::radix radix)
     {
         auto last = char_to_digit(value.back());
         auto length = value.length();
