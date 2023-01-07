@@ -96,27 +96,27 @@ public:
     }
 
     /// @brief Constructs from boolean.
-    template<concepts::logic::boolean T>
+    template<alf::concepts::boolean T>
     explicit json(T value) : internal_{value}, type_{class_type::boolean}
     {
     }
 
     /// @brief Constructs from integral.
-    template<concepts::numeric::integral T>
+    template<alf::concepts::integral T>
     explicit json(T value)
         : internal_{static_cast<alf::i64>(value)}, type_{class_type::integral}
     {
     }
 
     /// @brief Constructs from floating.
-    template<concepts::numeric::floating_point T>
+    template<alf::concepts::floating_point T>
     explicit json(T value)
         : internal_{static_cast<double>(value)}, type_{class_type::floating}
     {
     }
 
     /// @brief Constructs from floating.
-    template<concepts::same_as<class_type> T>
+    template<alf::concepts::same_as<class_type> T>
     explicit json(T value) : type_{value}
     {
         switch (value) {
@@ -135,7 +135,7 @@ public:
     }
 
     /// @brief Constructs from string.
-    template<concepts::convertible_to<alf::string> T>
+    template<alf::concepts::convertible_to<alf::string> T>
     explicit json(T value) : internal_{alf::string{value}}, type_{class_type::string}
     {
     }
@@ -180,7 +180,7 @@ public:
         return *this;
     }
 
-    template<std::same_as<bool> T>
+    template<alf::concepts::same_as<bool> T>
     json& operator=(T b) &
     {
         set_type(class_type::boolean);
@@ -189,7 +189,7 @@ public:
     }
 
     template<typename T>
-    requires std::integral<T> && (!std::same_as<T, bool>)
+    requires alf::concepts::integral<T> && (!alf::concepts::same_as<T, bool>)
     json& operator=(T i) &
     {
         set_type(class_type::integral);
@@ -197,7 +197,7 @@ public:
         return *this;
     }
 
-    template<std::floating_point T>
+    template<alf::concepts::floating_point T>
     json& operator=(T f) &
     {
         set_type(class_type::floating);
@@ -205,7 +205,7 @@ public:
         return *this;
     }
 
-    template<std::convertible_to<alf::string> T>
+    template<alf::concepts::convertible_to<alf::string> T>
     json& operator=(T s) &
     {
         set_type(class_type::string);

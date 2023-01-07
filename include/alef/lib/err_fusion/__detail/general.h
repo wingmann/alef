@@ -4,32 +4,11 @@
 #include "alef/lib/err_fusion/__detail/and.h"
 #include "alef/lib/err_fusion/__detail/constructor.h"
 #include "alef/lib/err_fusion/__detail/err.h"
+#include "alef/lib/err_fusion/__detail/general_impl.h"
 #include "alef/lib/err_fusion/__detail/ok.h"
 #include "alef/lib/err_fusion/__detail/or.h"
 #include "alef/lib/err_fusion/__detail/other.h"
 #include "alef/lib/err_fusion/__detail/storage.h"
-
-namespace alf::ef {
-
-template<typename T, typename E>
-class result;
-
-} // namespace alf::ef
-
-namespace alf::ef::__detail::impl {
-
-template<typename Func>
-struct result_of;
-
-template<typename Ret, typename Class, typename... Args>
-struct result_of<Ret (Class::*)(Args...)> : public result_of<Ret (Args...)> { };
-
-template<typename Ret, typename... Args>
-struct result_of<Ret (Args...)> {
-    using type = Ret;
-};
-
-} // namespace alf::ef::__detail::impl
 
 namespace alf::ef::__detail {
 

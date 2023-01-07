@@ -9,20 +9,20 @@ namespace alf::ef {
 template<typename T, typename E>
 class result {
 public:
-    using storage_type = __detail::storage<T, E>;
-    using constructor_type = __detail::constructor<T, E>;
+    using storage_type = alf::ef::__detail::storage<T, E>;
+    using constructor_type = alf::ef::__detail::constructor<T, E>;
 
 private:
     bool ok_;
     storage_type storage_;
 
 public:
-    result(ok_type<T> ok) : ok_(true)
+    result(alf::ef::ok_type<T> ok) : ok_(true)
     {
         storage_.construct(std::move(ok));
     }
 
-    result(err_type<E> err) : ok_(false)
+    result(alf::ef::err_type<E> err) : ok_(false)
     {
         storage_.construct(std::move(err));
     }
@@ -30,11 +30,19 @@ public:
     result(result&& other) noexcept
     {
         if (other.is_ok()) {
-            constructor_type::move(std::move(other.storage_), storage_, __detail::ok_tag());
+            constructor_type::move(
+                std::move(other.storage_),
+                storage_,
+                alf::ef::__detail::ok_tag());
+
             ok_ = true;
         }
         else {
-            constructor_type::move(std::move(other.storage_), storage_, __detail::err_tag());
+            constructor_type::move(
+                std::move(other.storage_),
+                storage_,
+                alf::ef::__detail::err_tag());
+
             ok_ = false;
         }
     }
@@ -42,11 +50,11 @@ public:
     result(const result& other)
     {
         if (other.is_ok()) {
-            constructor_type::copy(other.storage_, storage_, __detail::ok_tag());
+            constructor_type::copy(other.storage_, storage_, alf::ef::__detail::ok_tag());
             ok_ = true;
         }
         else {
-            constructor_type::copy(other.storage_, storage_, __detail::err_tag());
+            constructor_type::copy(other.storage_, storage_, alf::ef::__detail::err_tag());
             ok_ = false;
         }
     }
@@ -54,9 +62,9 @@ public:
     ~result()
     {
         if (ok_)
-            storage_.destroy(__detail::ok_tag());
+            storage_.destroy(alf::ef::__detail::ok_tag());
         else
-            storage_.destroy(__detail::err_tag());
+            storage_.destroy(alf::ef::__detail::err_tag());
     }
 
     [[nodiscard]]
@@ -80,45 +88,48 @@ public:
     template<
         typename Func,
         typename Ret = result<
-            typename __detail::result_ok_type<typename __detail::result_of<Func>::type>::type, E>>
+            typename alf::ef::__detail::result_ok_type<
+                typename alf::ef::__detail::result_of<Func>::type>::type, E>>
     requires (!std::same_as<E, void>)
     Ret map(Func func) const
     {
-        return __detail::map(*this, func);
+        return alf::ef::__detail::map(*this, func);
     }
 
     template<
         typename Func,
         typename Ret = result<
             T,
-            typename __detail::result_err_type<typename __detail::result_of<Func>::type>::type>>
+            typename alf::ef::__detail::result_err_type<
+                typename alf::ef::__detail::result_of<Func>::type>::type>>
     Ret map_error(Func func) const
     {
-        return __detail::map_error(*this, func);
+        return alf::ef::__detail::map_error(*this, func);
     }
 
     template<typename Func>
-    requires (!std::same_as<E, void>)
+    requires (!alf::concepts::same_as<E, void>)
     result<T, E> then(Func func) const
     {
-        return __detail::then(*this, func);
+        return alf::ef::__detail::then(*this, func);
     }
 
     template<typename Func>
-    requires (!std::same_as<E, void>)
+    requires (!alf::concepts::same_as<E, void>)
     result<T, E> otherwise(Func func) const
     {
-        return __detail::otherwise(*this, func);
+        return alf::ef::__detail::otherwise(*this, func);
     }
 
     template<
         typename Func,
         typename Ret = result<
             T,
-            typename __detail::result_err_type<typename __detail::result_of<Func>::type>::type>>
+            typename alf::ef::__detail::result_err_type<
+                typename alf::ef::__detail::result_of<Func>::type>::type>>
     Ret or_else(Func func) const
     {
-        return __detail::or_else_t(*this, func);
+        return alf::ef::__detail::or_else_t(*this, func);
     }
 
     storage_type& storage()
@@ -132,14 +143,14 @@ public:
     }
 
     template<typename U = T>
-    requires (!std::same_as<U, void>)
+    requires (!alf::concepts::same_as<U, void>)
     U unwrap_or(const U& default_value) const
     {
         return is_ok() ? storage().template get<U>() : default_value;
     }
 
     template<typename U = T>
-    requires (!std::same_as<U, void>)
+    requires (!alf::concepts::same_as<U, void>)
     U unwrap() const
     {
         if (is_ok()) return storage().template get<U>();
